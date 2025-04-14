@@ -1,5 +1,6 @@
 package com.salmanelk.springaitest.D_FunctionCalls;
 
+import java.nio.file.Files;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.BufferedWriter;
@@ -17,7 +18,7 @@ public class FunctionService implements Function<FunctionsRecords.Request, Strin
 
     @Override
     public String apply(FunctionsRecords.Request request) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(filePath.toPath())) {
             writer.write(request.content());
         } catch (IOException e) {
             System.err.println("An error occurred while writing to the file: " + e.getMessage());
